@@ -69,9 +69,14 @@ export const assertSameOrigin = (req: NextRequest) => {
     return NextResponse.json({ error: 'Cross-site request blocked' }, { status: 403 })
   }
 
+  const forwardedProto = req.headers.get('x-forwarded-proto')
+  const forwardedHost = req.headers.get('x-forwarded-host')
+  const host = forwardedHost || req.headers.get('host') || req.nextUrl.host
+  const protocol = forwardedProto || req.nextUrl.protocol.replace(':', '')
+  const expectedOrigin = `${protocol}://${host}`
+
   const origin = req.headers.get('origin')
   const referer = req.headers.get('referer')
-  const expectedOrigin = req.nextUrl.origin
 
   if (origin && origin !== expectedOrigin) {
     return NextResponse.json({ error: 'Cross-site request blocked' }, { status: 403 })
