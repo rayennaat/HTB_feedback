@@ -34,8 +34,8 @@ async function visitLink(path: string, token: string) {
       headers: { Cookie: `authToken=${token}` },
       cache: 'no-store'
     })
-  } catch {
-    // best-effort, queue continues regardless
+  } catch (err) {
+    console.error(`[moderationWorker] Failed to visit ${APP_ORIGIN}${path}`, err)
   }
 }
 
@@ -67,6 +67,10 @@ let started = false
 export function startModerationWorker() {
   if (started) return
   started = true
+
+  if (process.env.NODE_ENV === 'production' && (!process.env.APP_ORIGIN || process.env.APP_ORIGIN.includes('localhost'))) {
+    console.warn('[moderationWorker] WARNING: APP_ORIGIN is not set or points to localhost in production. The moderation worker will not function correctly.')
+  }
 
   setInterval(() => {
     processOpenReports().catch(() => {})

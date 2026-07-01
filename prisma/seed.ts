@@ -1,45 +1,45 @@
 import { PrismaClient } from '../app/generated/prisma'
 import bcrypt from 'bcryptjs'
+import { randomBytes } from 'crypto'
 
 const prisma = new PrismaClient()
 
 const ADMIN_EMAIL = process.env.MODERATOR_BOT_EMAIL || 'admin@gmail.com'
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || randomBytes(32).toString('hex')
 const DEFAULT_PASSWORD = 'Password123!'
+const FLAG = process.env.FLAG || 'FLAG{local_test_flag_not_real}'
 
 async function main() {
   // --- Clean slate ---
-  await prisma.notification.deleteMany()
-  await prisma.report.deleteMany()
-  await prisma.comment.deleteMany()
-  await prisma.feedback.deleteMany()
-  await prisma.user.deleteMany()
+  await prisma.$executeRawUnsafe('TRUNCATE TABLE "Notification", "Report", "Comment", "Feedback", "User" RESTART IDENTITY CASCADE')
 
-  const passwordHash = await bcrypt.hash(DEFAULT_PASSWORD, 10)
+  const adminPasswordHash = await bcrypt.hash(ADMIN_PASSWORD, 10)
+  const userPasswordHash = await bcrypt.hash(DEFAULT_PASSWORD, 10)
 
   // --- Users ---
   const admin = await prisma.user.create({
     data: {
       username: 'admin',
       email: ADMIN_EMAIL,
-      password: passwordHash,
+      password: adminPasswordHash,
       isAdmin: true
     }
   })
 
   const jamie = await prisma.user.create({
-    data: { username: 'jamie', email: 'jamie@example.com', password: passwordHash }
+    data: { username: 'jamie', email: 'jamie@example.com', password: userPasswordHash }
   })
 
   const kenji = await prisma.user.create({
-    data: { username: 'kenji', email: 'kenji@example.com', password: passwordHash }
+    data: { username: 'kenji', email: 'kenji@example.com', password: userPasswordHash }
   })
 
   const lara = await prisma.user.create({
-    data: { username: 'lara', email: 'lara@example.com', password: passwordHash }
+    data: { username: 'lara', email: 'lara@example.com', password: userPasswordHash }
   })
 
   const nour = await prisma.user.create({
-    data: { username: 'nour', email: 'nour@example.com', password: passwordHash }
+    data: { username: 'nour', email: 'nour@example.com', password: userPasswordHash }
   })
 
   // --- Approved public posts ---
@@ -141,6 +141,24 @@ async function main() {
     }
   })
 
+
+  // Hidden rejected post with the flag
+  const flagPost = await prisma.feedback.create({
+    data: {
+      title: 'Refund request rejected after delivery issue',
+      message:
+        'Filed a refund request after a delivery issue. Case was reviewed and closed by the moderation team.',
+      category: 'Shopping',
+      subject: 'Unnamed Vendor',
+      city: 'Tunis',
+      experienceType: 'Bad Experience',
+      status: 'rejected',
+      moderationReason: 'Hidden because the attached proof contains private customer details',
+      adminNote: FLAG,
+      userId: nour.id
+    }
+  })
+
   await prisma.feedback.create({
     data: {
       title: 'Agent showed us apartments that did not match the listing',
@@ -183,25 +201,8 @@ async function main() {
     }
   })
 
-  // Hidden rejected post with the flag
-  const flagPost = await prisma.feedback.create({
-    data: {
-      title: 'Refund request rejected after delivery issue',
-      message:
-        'Filed a refund request after a delivery issue. Case was reviewed and closed by the moderation team.',
-      category: 'Shopping',
-      subject: 'Unnamed Vendor',
-      city: 'Tunis',
-      experienceType: 'Bad Experience',
-      status: 'rejected',
-      moderationReason: 'Hidden because the attached proof contains private customer details',
-      adminNote: 'HTB{cache_keys_need_context_too}',
-      userId: nour.id
-    }
-  })
-
   console.log('Seed complete.')
-  console.log(`Admin: ${admin.email} / ${DEFAULT_PASSWORD}`)
+  console.log(`Admin: ${admin.email} / ${process.env.ADMIN_PASSWORD ? 'ADMIN_PASSWORD env value' : 'random generated password'}`)
   console.log(`Sample users: jamie, kenji, lara, nour / ${DEFAULT_PASSWORD}`)
   console.log(`Hidden post id: ${flagPost.id}`)
 }

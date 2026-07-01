@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { ArrowRight, Eye, EyeOff, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Eye, EyeOff } from 'lucide-react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -54,30 +54,6 @@ export default function LoginPage() {
                   Sign in to share experiences, follow replies, save useful posts, and help keep public discovery clean through reports and moderation.
                 </p>
               </div>
-
-              <div className="mt-10 rounded-2xl border border-white/10 bg-white/10 p-5">
-                <div className="flex items-start gap-3">
-                  <ShieldCheck className="mt-1 h-5 w-5 text-teal-200" />
-                  <div>
-                    <h2 className="font-black">Demo admin</h2>
-                    <p className="mt-1 text-sm text-stone-300">Use this account to inspect the moderation dashboard.</p>
-                  </div>
-                </div>
-                <dl className="mt-4 grid gap-3 text-sm text-stone-200">
-                  <div className="flex justify-between gap-4 rounded-xl bg-white/10 px-3 py-2"><dt>Email</dt><dd className="font-mono">admin@gmail.com</dd></div>
-                  <div className="flex justify-between gap-4 rounded-xl bg-white/10 px-3 py-2"><dt>Password</dt><dd className="font-mono">admin</dd></div>
-                </dl>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEmail('admin@gmail.com')
-                    setPassword('admin')
-                  }}
-                  className="mt-4 w-full rounded-xl bg-white px-4 py-2.5 text-sm font-black text-stone-950 hover:bg-teal-50"
-                >
-                  Fill demo credentials
-                </button>
-              </div>
             </div>
           </section>
 
@@ -88,7 +64,7 @@ export default function LoginPage() {
             </Link>
             <p className="eyebrow mt-9">Welcome back</p>
             <h1 className="mt-3 text-3xl font-black tracking-tight text-stone-950">Log in to your account</h1>
-            <p className="mt-2 text-sm leading-6 text-stone-600">Continue to your feed, saved posts, notifications, or admin dashboard.</p>
+            <p className="mt-2 text-sm leading-6 text-stone-600">Continue to your feed, saved posts, notifications, and account updates.</p>
 
             <form onSubmit={handleLogin} className="mt-7 space-y-5">
               <div>

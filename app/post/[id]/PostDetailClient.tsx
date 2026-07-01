@@ -360,7 +360,8 @@ export default function PostDetailClient({ initialPost }: { initialPost: PostSta
               </div>
               <div>
                 <label className="mb-1 block text-sm font-medium text-stone-700">Details</label>
-                <textarea value={reportDetails} onChange={(e) => setReportDetails(e.target.value)} rows={4} className="w-full rounded-md border border-stone-300 px-3 py-2 text-sm text-stone-800 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" placeholder="Add context for the moderator." />
+                <textarea value={reportDetails} onChange={(e) => setReportDetails(e.target.value)} rows={4} className="w-full rounded-md border border-stone-300 px-3 py-2 text-sm text-stone-800 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" placeholder="Add context or relevant links for the moderation team." />
+                <p className="mt-1 text-xs text-stone-500">Reports are usually reviewed shortly after submission.</p>
               </div>
             </div>
             <div className="mt-5 flex justify-end gap-2">
