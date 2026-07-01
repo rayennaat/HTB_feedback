@@ -9,12 +9,6 @@ interface JwtPayload {
   username: string
 }
 
-// ---------------------------------------------------------------------------
-// In-memory response cache
-// Cache key: URL path only (/api/feedback/1337)
-// BUG: does not vary by cookie, user ID, or role — admin responses get served
-//      to anonymous users after the cache is populated.
-// ---------------------------------------------------------------------------
 const responseCache = (globalThis as typeof globalThis & {
   __feedbackApiCache?: Map<string, { body: unknown; cachedAt: number }>
 }).__feedbackApiCache ?? (() => {
@@ -55,14 +49,12 @@ export async function GET(req: NextRequest) {
   const cacheKey = getCacheKey(req)
   const cached = responseCache.get(cacheKey)
 
-  // Serve from cache if still fresh — auth is NOT checked here
   if (cached && Date.now() - cached.cachedAt < CACHE_TTL_MS) {
     return NextResponse.json(cached.body, {
       headers: { 'X-Feedback-Cache': 'HIT' }
     })
   }
 
-  // --- Auth check happens AFTER cache miss only ---
   const currentUserId = getCurrentUserId(req)
 
   const feedback = await prisma.feedback.findUnique({
@@ -76,7 +68,6 @@ export async function GET(req: NextRequest) {
   })
 
   if (!feedback) {
-    // Never cache 404 — attacker visiting first must not poison the cache
     return NextResponse.json({ error: 'Post not found' }, { status: 404 })
   }
 
@@ -95,7 +86,6 @@ export async function GET(req: NextRequest) {
     currentUserIsAdmin
 
   if (!canView) {
-    // Never cache denied responses either
     return NextResponse.json({ error: 'Post not found' }, { status: 404 })
   }
 
@@ -125,14 +115,11 @@ export async function GET(req: NextRequest) {
     moderationReason: feedback.moderationReason
   }
 
-  // Admin-only fields — included in the cached response, later leaked to
-  // anonymous users once the cache is poisoned
   if (currentUserIsAdmin) {
     responseBody.adminNote = feedback.adminNote
     responseBody.authorEmail = feedback.user.email
   }
 
-  // Cache the 200 response under the path key only (no auth context)
   responseCache.set(cacheKey, { body: responseBody, cachedAt: Date.now() })
 
   return NextResponse.json(responseBody, {

@@ -8,12 +8,6 @@ interface PageProps {
   params: Promise<{ id: string }>
 }
 
-// ---------------------------------------------------------------------------
-// Fetch post through the API route (not directly from Prisma).
-// This is intentional: when the admin bot visits /post/1337, this fetch call
-// carries the admin's authToken cookie and goes through /api/feedback/1337,
-// which populates the in-memory cache with the admin-enriched response.
-// ---------------------------------------------------------------------------
 const getPost = async (id: number) => {
   const cookieStore = await cookies()
   const authToken = cookieStore.get('authToken')?.value
