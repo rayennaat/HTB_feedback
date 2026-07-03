@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 
 const ADMIN_EMAIL = process.env.MODERATOR_BOT_EMAIL || 'admin@gmail.com'
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || randomBytes(32).toString('hex')
-const DEFAULT_PASSWORD = 'Password123!'
+const DEFAULT_PASSWORD = 'P1$$w0rD123!'
 const FLAG = process.env.FLAG || 'FLAG{local_test_flag_not_real}'
 
 async function main() {
@@ -42,15 +42,15 @@ async function main() {
     data: { username: 'nour', email: 'nour@example.com', password: userPasswordHash }
   })
 
-  // --- Approved public posts ---
+  // --- Seeded posts: public IDs 1-5, hidden flag ID 6, public IDs 7-8 ---
   await prisma.feedback.create({
     data: {
-      title: 'Received a broken watch after 2 week wait',
+      title: 'Laptop repair shop kept delaying pickup',
       message:
-        'Ordered a Casio watch from Jumia, it arrived with a cracked screen and the strap was already detached from the case. Contacted support 3 times, no response. Complete waste of money.',
-      category: 'Shopping',
-      subject: 'Jumia',
-      city: 'Tunis',
+        'Dropped off a laptop for a simple battery replacement. The shop promised two days, then kept delaying for almost three weeks without clear updates. I finally got it back, but the communication was terrible.',
+      category: 'Customer Support',
+      subject: 'FixPoint Repairs',
+      city: 'London',
       experienceType: 'Bad Experience',
       status: 'approved',
       userId: jamie.id
@@ -59,12 +59,12 @@ async function main() {
 
   await prisma.feedback.create({
     data: {
-      title: 'Seller disappeared after receiving payment',
+      title: 'Refund took a month after cancelled order',
       message:
-        'Agreed to buy a PlayStation 5 from a seller on Facebook Marketplace. Sent 850 TND via D17, seller blocked me immediately. No product, no refund, no response. Be careful with this platform.',
-      category: 'Shopping',
-      subject: 'Facebook Marketplace',
-      city: 'Sfax',
+        'Cancelled an online furniture order before it shipped. Support confirmed the cancellation, but the refund only arrived after five calls and a payment dispute. Keep screenshots of every support reply.',
+      category: 'Online Shopping',
+      subject: 'HomeCart',
+      city: 'New York',
       experienceType: 'Warning',
       status: 'approved',
       userId: kenji.id
@@ -73,13 +73,13 @@ async function main() {
 
   await prisma.feedback.create({
     data: {
-      title: 'Food arrived cold and order was wrong',
+      title: 'Internet provider fixed outage quickly',
       message:
-        'Ordered a large pepperoni pizza and garlic bread. What arrived was completely cold, wrong toppings, and one item missing. Delivery took 1h20 for a 20 minute distance. Never again.',
-      category: 'Food & Restaurants',
-      subject: 'Pizza Hut Lac',
-      city: 'Tunis',
-      experienceType: 'Bad Experience',
+        'Reported a neighborhood outage in the morning and got a technician update within an hour. Service was back before the workday ended. Surprisingly smooth support experience.',
+      category: 'Telecom & Internet',
+      subject: 'MetroNet Mobile',
+      city: 'Berlin',
+      experienceType: 'Recommendation',
       status: 'approved',
       userId: lara.id
     }
@@ -87,12 +87,12 @@ async function main() {
 
   await prisma.feedback.create({
     data: {
-      title: '4G speeds completely unusable for 3 weeks',
+      title: 'Subscription charged after cancellation',
       message:
-        'Been paying for 4G and getting 0.3 Mbps consistently for almost a month. Called customer service twice, they keep saying "technical team is working on it." No compensation offered.',
-      category: 'Telecom',
-      subject: 'Ooredoo Tunisia',
-      city: 'Ariana',
+        'Cancelled my fitness app subscription from the account page, but I was billed again the next cycle. Support eventually refunded me, but only after I sent proof of the cancellation email.',
+      category: 'Banks & Payments',
+      subject: 'FitTrack Plus',
+      city: 'Remote',
       experienceType: 'Bad Experience',
       status: 'approved',
       userId: nour.id
@@ -101,56 +101,27 @@ async function main() {
 
   await prisma.feedback.create({
     data: {
-      title: 'Account frozen with no explanation for 10 days',
+      title: 'Is TravelNest reliable for last minute hotel bookings?',
       message:
-        'My account was frozen without any notification or reason given. Went to the branch twice, each time they told me to come back. Salary got deposited and I couldn\'t access it for 10 days.',
-      category: 'Banking & Finance',
-      subject: 'BNA Bank',
-      city: 'Tunis',
-      experienceType: 'Bad Experience',
+        'I am looking at a same-day booking through TravelNest and the price is much lower than the hotel site. Has anyone had trouble with reservations not showing up at check-in?',
+      category: 'Travel & Hotels',
+      subject: 'TravelNest',
+      city: 'Paris',
+      experienceType: 'Question',
       status: 'approved',
       userId: jamie.id
     }
   })
 
-  await prisma.feedback.create({
-    data: {
-      title: 'Best private clinic experience I have had in Tunisia',
-      message:
-        'Went in for a minor procedure. Staff was professional, facility was clean, waiting time was under 20 minutes. Doctor explained everything clearly. Highly recommend.',
-      category: 'Healthcare',
-      subject: 'Clinique Les Oliviers',
-      city: 'Sousse',
-      experienceType: 'Recommendation',
-      status: 'approved',
-      userId: kenji.id
-    }
-  })
-
-  await prisma.feedback.create({
-    data: {
-      title: 'Charged annual fee then closed without warning',
-      message:
-        'Paid 600 TND for a full year membership in January. By March the gym closed its doors with no announcement, no refunds, and the owner is unreachable. Avoid annual upfront payment gyms.',
-      category: 'Sports & Fitness',
-      subject: 'Fit Zone Gym',
-      city: 'Tunis',
-      experienceType: 'Warning',
-      status: 'approved',
-      userId: lara.id
-    }
-  })
-
-
-  // Hidden rejected post with the flag
+  // Hidden rejected post with the flag. With identity reset, this is feedback ID 6.
   const flagPost = await prisma.feedback.create({
     data: {
       title: 'Refund request rejected after delivery issue',
       message:
         'Filed a refund request after a delivery issue. Case was reviewed and closed by the moderation team.',
-      category: 'Shopping',
+      category: 'Online Shopping',
       subject: 'Unnamed Vendor',
-      city: 'Tunis',
+      city: 'Remote',
       experienceType: 'Bad Experience',
       status: 'rejected',
       moderationReason: 'Hidden because the attached proof contains private customer details',
@@ -161,43 +132,29 @@ async function main() {
 
   await prisma.feedback.create({
     data: {
-      title: 'Agent showed us apartments that did not match the listing',
+      title: 'Delivery driver marked package as delivered too early',
       message:
-        'Wasted three weekends visiting apartments listed at one price that were completely different in person — wrong size, different floor, different condition. Felt like bait and switch.',
-      category: 'Real Estate',
-      subject: 'Century 21 Tunisia',
-      city: 'Tunis',
-      experienceType: 'Bad Experience',
-      status: 'approved',
-      userId: nour.id
-    }
-  })
-
-  await prisma.feedback.create({
-    data: {
-      title: 'Does Carrefour La Marsa accept returns without a receipt?',
-      message:
-        'Bought a blender two days ago and it stopped working already. I lost the receipt but still have the original box and the item is clearly defective. Anyone been through this?',
-      category: 'General Question',
-      subject: 'Carrefour Tunisia',
-      city: 'Tunis',
-      experienceType: 'Question',
-      status: 'approved',
-      userId: jamie.id
-    }
-  })
-
-  await prisma.feedback.create({
-    data: {
-      title: 'Package marked delivered but never arrived',
-      message:
-        'Tracking showed my package as delivered on Tuesday. Nothing arrived. Neighbor didn\'t receive it either. Opened a claim, they said the driver confirmed delivery but could not provide proof.',
-      category: 'Shipping & Delivery',
-      subject: 'Aramex Tunisia',
-      city: 'Bizerte',
+        'Tracking showed delivered two hours before the package actually arrived. Support was polite but could not explain the mismatch. It worked out, but the tracking caused a lot of stress.',
+      category: 'Delivery & Couriers',
+      subject: 'QuickShip',
+      city: 'Toronto',
       experienceType: 'Bad Experience',
       status: 'approved',
       userId: lara.id
+    }
+  })
+
+  await prisma.feedback.create({
+    data: {
+      title: 'Coworking space handled a noisy room complaint well',
+      message:
+        'Booked a desk near a private event and could barely take calls. The front desk moved me to a quieter floor and added a free day credit without arguing. Good recovery from a bad start.',
+      category: 'Jobs & Workplaces',
+      subject: 'DeskBridge Coworking',
+      city: 'Amsterdam',
+      experienceType: 'Good Experience',
+      status: 'approved',
+      userId: kenji.id
     }
   })
 

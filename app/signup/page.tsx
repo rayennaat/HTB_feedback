@@ -42,8 +42,8 @@ export default function SignupPage() {
         <div className="grid w-full max-w-6xl gap-5 lg:grid-cols-[430px_1fr]">
           <section className="premium-surface p-6 sm:p-8">
             <Link href="/" className="inline-flex items-center gap-3 text-sm font-black text-stone-950">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-700 text-xs text-white">TN</span>
-              Feedback TN
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-700 text-xs text-white">FH</span>
+              Feedback Hub
             </Link>
             <p className="eyebrow mt-9">Join the community</p>
             <h1 className="mt-3 text-3xl font-black tracking-tight text-stone-950">Create your account</h1>

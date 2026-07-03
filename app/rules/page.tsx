@@ -23,7 +23,7 @@ const rules = [
   },
   {
     title: 'Moderation decisions',
-    body: 'Admins can approve, hide, delete, or request changes when content is unsafe, unverifiable, private, spammy, or outside the purpose of Feedback TN.'
+    body: 'Admins can approve, hide, delete, or request changes when content is unsafe, unverifiable, private, spammy, or outside the purpose of Feedback Hub.'
   }
 ]
 
@@ -32,14 +32,14 @@ export default function RulesPage() {
     <main className="app-shell px-4 py-8 text-stone-950 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <header className="mb-8 flex items-center justify-between border-b border-stone-200/80 pb-4">
-          <Link href="/" className="text-sm font-semibold text-stone-700 hover:text-stone-950">Feedback TN</Link>
+          <Link href="/" className="text-sm font-semibold text-stone-700 hover:text-stone-950">Feedback Hub</Link>
           <Link href="/feedback?public=1" className="text-sm font-semibold text-teal-700 hover:text-teal-800">Browse posts</Link>
         </header>
 
         <section className="mb-6">
           <p className="text-sm font-semibold uppercase tracking-wide text-teal-700">Trust and safety</p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-stone-950">Community rules</h1>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-stone-600">Feedback TN is for useful Tunisian experiences, questions, warnings, and recommendations. These rules help keep posts helpful, fair, and safe for the people reading and the people being discussed.</p>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-stone-600">Feedback Hub is for useful service experiences, questions, warnings, and recommendations. These rules help keep posts helpful, fair, and safe for the people reading and the people being discussed.</p>
         </section>
 
         <div className="space-y-3">

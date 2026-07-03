@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Feedback TN",
-  description: "A Tunisian community platform for sharing reviews, warnings, questions, and service experiences in Tounsi, Arabic, French, or English.",
+  title: "Feedback Hub",
+  description: "A community platform for sharing reviews, warnings, questions, and service experiences.",
 };
 
 export default function RootLayout({

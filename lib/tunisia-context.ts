@@ -1,42 +1,28 @@
-export const TUNISIA_CITIES = [
-  'Tunis',
-  'Sfax',
-  'Sousse',
-  'Ariana',
-  'Ben Arous',
-  'Manouba',
-  'Nabeul',
-  'Bizerte',
-  'Gabes',
-  'Kairouan',
-  'Monastir',
-  'Mahdia',
-  'Medenine',
-  'Djerba',
-  'Tozeur',
-  'Kebili',
-  'Gafsa',
-  'Kasserine',
-  'Sidi Bouzid',
-  'Siliana',
-  'Beja',
-  'Jendouba',
-  'Le Kef',
-  'Zaghouan',
-  'Tataouine',
+export const GLOBAL_LOCATIONS = [
+  'New York',
+  'London',
+  'Berlin',
+  'Paris',
+  'Madrid',
+  'Amsterdam',
+  'Toronto',
+  'Dubai',
+  'Singapore',
+  'Sydney',
+  'Remote',
   'Other'
 ]
 
-export const TUNISIA_CATEGORIES = [
+export const FEEDBACK_CATEGORIES = [
   'Online Shopping',
   'Delivery & Couriers',
-  'Call Centers',
+  'Customer Support',
   'Jobs & Workplaces',
   'Restaurants & Cafes',
   'Telecom & Internet',
   'Banks & Payments',
   'Public Services',
-  'Transport & Taxis',
+  'Transport & Rideshare',
   'Rent & Housing',
   'Healthcare & Clinics',
   'Education & Training',
@@ -54,8 +40,8 @@ export const EXPERIENCE_TYPES = [
 ]
 
 export const SUPPORTED_LANGUAGE_LABELS = [
-  'Tounsi',
-  'Arabic',
+  'English',
+  'Spanish',
   'French',
-  'English'
+  'Arabic'
 ]

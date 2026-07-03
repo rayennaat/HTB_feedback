@@ -45,11 +45,11 @@ export default function LoginPage() {
             <div className="flex h-full flex-col justify-between rounded-2xl bg-stone-950 p-8 text-white shadow-2xl shadow-stone-900/20">
               <div>
                 <Link href="/" className="inline-flex items-center gap-3 text-sm font-black text-white">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-xs">TN</span>
-                  Feedback TN
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-xs">FH</span>
+                  Feedback Hub
                 </Link>
                 <p className="mt-12 text-sm font-bold uppercase tracking-[0.2em] text-teal-200">Trust and safety first</p>
-                <h1 className="mt-4 max-w-xl text-5xl font-black leading-tight tracking-tight">Moderated community feedback for Tunisia.</h1>
+                <h1 className="mt-4 max-w-xl text-5xl font-black leading-tight tracking-tight">Moderated community feedback for real services.</h1>
                 <p className="mt-5 max-w-xl text-lg leading-8 text-stone-300">
                   Sign in to share experiences, follow replies, save useful posts, and help keep public discovery clean through reports and moderation.
                 </p>
@@ -59,8 +59,8 @@ export default function LoginPage() {
 
           <section className="premium-surface p-6 sm:p-8">
             <Link href="/" className="inline-flex items-center gap-3 text-sm font-black text-stone-950">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-700 text-xs text-white">TN</span>
-              Feedback TN
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-700 text-xs text-white">FH</span>
+              Feedback Hub
             </Link>
             <p className="eyebrow mt-9">Welcome back</p>
             <h1 className="mt-3 text-3xl font-black tracking-tight text-stone-950">Log in to your account</h1>

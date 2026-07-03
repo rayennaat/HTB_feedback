@@ -47,11 +47,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { username } = await params
   const user = await getUserProfile(username)
 
-  if (!user) return { title: 'User not found | Feedback TN' }
+  if (!user) return { title: 'User not found | Feedback Hub' }
 
   return {
-    title: `${user.username} profile | Feedback TN`,
-    description: `Public posts and replies from ${user.username} on Feedback TN.`
+    title: `${user.username} profile | Feedback Hub`,
+    description: `Public posts and replies from ${user.username} on Feedback Hub.`
   }
 }
 
@@ -69,7 +69,7 @@ export default async function UserProfilePage({ params }: PageProps) {
       <div className="mx-auto max-w-5xl">
         <header className="mb-6 flex items-center justify-between border-b border-stone-200/80 pb-4">
           <Link href="/feedback?public=1" className="text-sm font-semibold text-teal-700 hover:text-teal-800">Back to public feed</Link>
-          <Link href="/" className="text-sm font-semibold text-stone-700 hover:text-stone-950">Feedback TN</Link>
+          <Link href="/" className="text-sm font-semibold text-stone-700 hover:text-stone-950">Feedback Hub</Link>
         </header>
 
         <section className="mb-6 rounded-lg border border-stone-200/80 bg-white p-6 shadow-[0_8px_24px_rgba(37,31,24,0.06)]">

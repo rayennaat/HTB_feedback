@@ -31,20 +31,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const postId = Number(id)
 
   if (!Number.isInteger(postId)) {
-    return { title: 'Post not found | Feedback TN' }
+    return { title: 'Post not found | Feedback Hub' }
   }
 
   const post = await getPost(postId)
 
   if (!post) {
-    return { title: 'Post not found | Feedback TN' }
+    return { title: 'Post not found | Feedback Hub' }
   }
 
   const description =
     post.message.length > 155 ? `${post.message.slice(0, 152)}...` : post.message
 
   return {
-    title: `${post.title} | Feedback TN`,
+    title: `${post.title} | Feedback Hub`,
     description,
     openGraph: {
       title: post.title,
@@ -76,7 +76,7 @@ export default async function PostDetailPage({ params }: PageProps) {
             Back to experiences
           </Link>
           <Link href="/" className="text-sm font-semibold text-stone-700 hover:text-stone-950">
-            Feedback TN
+            Feedback Hub
           </Link>
         </header>
 

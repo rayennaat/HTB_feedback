@@ -2,14 +2,14 @@ import Link from 'next/link'
 import { ArrowRight, BadgeCheck, Building2, MapPin, MessageSquareWarning, Search, ShieldCheck, Sparkles } from 'lucide-react'
 
 const examples = [
-  { title: 'Is this call center good for students?', category: 'Call Centers', city: 'Tunis', type: 'Question' },
-  { title: 'Online order arrived broken', category: 'Online Shopping', city: 'Sfax', type: 'Bad Experience' },
-  { title: 'Internet outage in Ariana', category: 'Telecom & Internet', city: 'Ariana', type: 'Warning' },
-  { title: 'Fast delivery in Sousse', category: 'Delivery & Couriers', city: 'Sousse', type: 'Recommendation' }
+  { title: 'Is this support team reliable?', category: 'Customer Support', city: 'London', type: 'Question' },
+  { title: 'Online order arrived broken', category: 'Online Shopping', city: 'New York', type: 'Bad Experience' },
+  { title: 'Internet outage during work hours', category: 'Telecom & Internet', city: 'Berlin', type: 'Warning' },
+  { title: 'Fast delivery with clear tracking', category: 'Delivery & Couriers', city: 'Madrid', type: 'Recommendation' }
 ]
 
 const stats = [
-  ['Cities', '24+'],
+  ['Locations', '12+'],
   ['Categories', '15'],
   ['Languages', '4'],
 ]
@@ -20,8 +20,8 @@ export default function HomePage() {
       <div className="app-container flex min-h-screen flex-col py-5 sm:py-6">
         <header className="premium-nav sticky top-4 z-20 flex items-center justify-between px-4 py-3 sm:px-5">
           <Link href="/" className="flex items-center gap-3 text-base font-black tracking-tight text-stone-950">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-700 text-sm text-white shadow-lg shadow-teal-900/20">TN</span>
-            Feedback TN
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-700 text-sm text-white shadow-lg shadow-teal-900/20">FH</span>
+            Feedback Hub
           </Link>
           <nav className="flex items-center gap-1 sm:gap-2">
             <Link href="/about" className="hidden rounded-lg px-3 py-2 text-sm font-semibold text-stone-600 hover:bg-white/70 hover:text-stone-950 sm:inline-flex">About</Link>
@@ -35,13 +35,13 @@ export default function HomePage() {
         <section className="grid flex-1 items-center gap-8 py-12 lg:grid-cols-[1.04fr_0.96fr] lg:py-16">
           <div>
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-teal-900/10 bg-white/60 px-3 py-1.5 text-sm font-bold text-teal-800 shadow-[0_8px_24px_rgba(37,31,24,0.06)]">
-              <Sparkles className="h-4 w-4" /> Tunisia shares. Tunisia learns.
+              <Sparkles className="h-4 w-4" /> Share experiences. Learn faster.
             </div>
             <h1 className="text-balance max-w-4xl text-5xl font-black leading-[0.98] tracking-tight text-stone-950 sm:text-6xl lg:text-7xl">
-              Real Tunisian experiences, easier to trust and share.
+              Real service experiences, easier to trust and share.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-stone-600 sm:text-xl">
-              Discover warnings, questions, recommendations, and service stories about companies, jobs, shops, banks, delivery, telecom, restaurants, and public services across Tunisia.
+              Discover warnings, questions, recommendations, and service stories about companies, jobs, shops, banks, delivery, telecom, restaurants, and public services worldwide.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/signup" className="btn-primary px-6 py-3 text-sm">
@@ -77,7 +77,7 @@ export default function HomePage() {
                 </div>
                 <div className="rounded-xl bg-white/10 p-3">
                   <MapPin className="h-5 w-5 text-teal-200" />
-                  <p className="mt-2 text-sm font-bold">City</p>
+                  <p className="mt-2 text-sm font-bold">Location</p>
                 </div>
                 <div className="rounded-xl bg-white/10 p-3">
                   <ShieldCheck className="h-5 w-5 text-teal-200" />

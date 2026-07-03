@@ -6,7 +6,7 @@ import type { ReactNode } from 'react'
 import { Bell, Bookmark, BookmarkCheck, UserCircle } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
-import { EXPERIENCE_TYPES, SUPPORTED_LANGUAGE_LABELS, TUNISIA_CATEGORIES, TUNISIA_CITIES } from '@/lib/tunisia-context'
+import { EXPERIENCE_TYPES, FEEDBACK_CATEGORIES, GLOBAL_LOCATIONS, SUPPORTED_LANGUAGE_LABELS } from '@/lib/tunisia-context'
 import { slugify } from '@/lib/slug'
 
 const REPORT_REASONS = [
@@ -91,7 +91,7 @@ const emptyPost: ExperienceFormState = {
   message: '',
   category: 'General Question',
   subject: '',
-  city: 'Tunis',
+  city: 'New York',
   experienceType: 'Question',
   isAnonymous: false,
   proofImageUrl: ''
@@ -135,7 +135,7 @@ export default function FeedbackPage() {
       ...item,
       category: item.category || 'General Question',
       subject: item.subject || 'General',
-      city: item.city || 'Tunisia',
+      city: item.city || 'Remote',
       experienceType: item.experienceType || 'Question',
       isAnonymous: Boolean(item.isAnonymous),
       proofImageUrl: item.proofImageUrl || '',
@@ -604,7 +604,7 @@ export default function FeedbackPage() {
         <div>
           <label htmlFor="category" className="mb-1 block text-sm font-medium text-stone-700">Category</label>
           <select id="category" value={value.category} onChange={(e) => onChange({ ...value, category: e.target.value })} className="w-full rounded-xl border border-stone-300/80 px-3 py-2 text-stone-700 shadow-[0_8px_24px_rgba(37,31,24,0.06)] outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100">
-            {TUNISIA_CATEGORIES.map(category => <option key={category}>{category}</option>)}
+            {FEEDBACK_CATEGORIES.map(category => <option key={category}>{category}</option>)}
           </select>
         </div>
         <div>
@@ -616,14 +616,14 @@ export default function FeedbackPage() {
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label htmlFor="city" className="mb-1 block text-sm font-medium text-stone-700">City</label>
+          <label htmlFor="city" className="mb-1 block text-sm font-medium text-stone-700">Location</label>
           <select id="city" value={value.city} onChange={(e) => onChange({ ...value, city: e.target.value })} className="w-full rounded-xl border border-stone-300/80 px-3 py-2 text-stone-700 shadow-[0_8px_24px_rgba(37,31,24,0.06)] outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100">
-            {TUNISIA_CITIES.map(city => <option key={city}>{city}</option>)}
+            {GLOBAL_LOCATIONS.map(city => <option key={city}>{city}</option>)}
           </select>
         </div>
         <div>
           <label htmlFor="subject" className="mb-1 block text-sm font-medium text-stone-700">Company, shop, service, or topic</label>
-          <input type="text" id="subject" className="w-full rounded-xl border border-stone-300/80 px-3 py-2 text-stone-700 shadow-[0_8px_24px_rgba(37,31,24,0.06)] outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" value={value.subject} onChange={(e) => onChange({ ...value, subject: e.target.value })} placeholder="Example: Teleperformance, Jumia, delivery company" required />
+          <input type="text" id="subject" className="w-full rounded-xl border border-stone-300/80 px-3 py-2 text-stone-700 shadow-[0_8px_24px_rgba(37,31,24,0.06)] outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" value={value.subject} onChange={(e) => onChange({ ...value, subject: e.target.value })} placeholder="Example: Teleperformance, ShopNow, delivery company" required />
         </div>
       </div>
       <div>
@@ -660,8 +660,8 @@ export default function FeedbackPage() {
       <div className="app-container">
         <div className="premium-surface mb-8 p-6 sm:flex sm:items-start sm:justify-between sm:gap-6">
           <div className="text-center sm:text-left">
-            <h1 className="text-3xl font-black tracking-tight text-stone-950">Feedback TN</h1>
-            <p className="mt-2 max-w-2xl text-base leading-7 text-stone-600">Share reviews, warnings, questions, and recommendations from real experiences in Tunisia.</p>
+            <h1 className="text-3xl font-black tracking-tight text-stone-950">Feedback Hub</h1>
+            <p className="mt-2 max-w-2xl text-base leading-7 text-stone-600">Share reviews, warnings, questions, and recommendations from real experiences anywhere.</p>
           </div>
           {activeUser ? (
             <div className="mt-4 flex items-center justify-center gap-2 sm:mt-0">
@@ -720,15 +720,15 @@ export default function FeedbackPage() {
 
         <div className="premium-surface mb-6 p-4">
           <div className="grid gap-3 lg:grid-cols-[1.2fr_0.9fr_auto_auto_auto_auto]">
-            <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search: Teleperformance Sousse, Jumia delivery..." className="rounded-xl border border-stone-300/80 px-3 py-2 text-sm text-stone-950 placeholder:text-stone-500 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
+            <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search: support delays, broken delivery, bank dispute..." className="rounded-xl border border-stone-300/80 px-3 py-2 text-sm text-stone-950 placeholder:text-stone-500 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
             <input type="text" value={subjectQuery} onChange={(e) => setSubjectQuery(e.target.value)} placeholder="Company/service" className="rounded-xl border border-stone-300/80 px-3 py-2 text-sm text-stone-950 placeholder:text-stone-500 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100" />
             <select value={cityFilter} onChange={(e) => setCityFilter(e.target.value)} className="rounded-xl border border-stone-300/80 px-3 py-2 text-sm text-stone-800 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100">
-              <option value="all">All cities</option>
-              {TUNISIA_CITIES.map(city => <option key={city}>{city}</option>)}
+              <option value="all">All locations</option>
+              {GLOBAL_LOCATIONS.map(city => <option key={city}>{city}</option>)}
             </select>
             <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="rounded-xl border border-stone-300/80 px-3 py-2 text-sm text-stone-800 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100">
               <option value="all">All categories</option>
-              {TUNISIA_CATEGORIES.map(category => <option key={category}>{category}</option>)}
+              {FEEDBACK_CATEGORIES.map(category => <option key={category}>{category}</option>)}
             </select>
             <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="rounded-xl border border-stone-300/80 px-3 py-2 text-sm text-stone-800 outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100">
               <option value="all">All types</option>
@@ -824,8 +824,10 @@ export default function FeedbackPage() {
                             {item.proofImageUrl && <Image src={item.proofImageUrl} alt="Proof attached to this post" width={900} height={520} className="mt-3 max-h-72 w-full rounded-xl border border-stone-200/80 bg-white object-contain" />}
                           </div>
                           {item.status === 'approved' && (
-                            <button onClick={() => handleLike(item.id)} className={`flex items-center gap-1 self-start transition-all duration-200 ${item.isLiked ? 'scale-110 text-teal-700' : 'text-stone-500 hover:text-teal-600'}`}>
-                              <span>{item.isLiked ? 'Liked' : 'Like'}</span>
+                            <button onClick={() => handleLike(item.id)} title={item.isLiked ? 'Unlike' : 'Like'} aria-label={item.isLiked ? 'Unlike post' : 'Like post'} className={`flex items-center gap-1.5 self-start rounded-xl border px-3 py-1.5 text-sm font-semibold transition-all duration-200 ${item.isLiked ? 'border-teal-200 bg-teal-50 text-teal-700 scale-105' : 'border-stone-200 bg-white text-stone-500 hover:border-teal-200 hover:bg-teal-50 hover:text-teal-600'}`}>
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill={item.isLiked ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                              </svg>
                               <span>{item.likes}</span>
                             </button>
                           )}

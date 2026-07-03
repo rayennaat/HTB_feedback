@@ -27,11 +27,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const posts = await getCompanyPosts(slug)
   const subject = posts[0]?.subject
 
-  if (!subject) return { title: 'Company not found | Feedback TN' }
+  if (!subject) return { title: 'Company not found | Feedback Hub' }
 
   return {
-    title: `${subject} experiences | Feedback TN`,
-    description: `Reviews, questions, warnings, and recommendations about ${subject} in Tunisia.`
+    title: `${subject} experiences | Feedback Hub`,
+    description: `Reviews, questions, warnings, and recommendations about ${subject}.`
   }
 }
 
@@ -50,7 +50,7 @@ export default async function CompanyPage({ params }: PageProps) {
       <div className="mx-auto max-w-5xl">
         <header className="mb-6 flex items-center justify-between border-b border-stone-200/80 pb-4">
           <Link href="/feedback?public=1" className="text-sm font-semibold text-teal-700 hover:text-teal-800">Back to public feed</Link>
-          <Link href="/" className="text-sm font-semibold text-stone-700 hover:text-stone-950">Feedback TN</Link>
+          <Link href="/" className="text-sm font-semibold text-stone-700 hover:text-stone-950">Feedback Hub</Link>
         </header>
 
         <section className="mb-6 rounded-lg border border-stone-200/80 bg-white p-6 shadow-[0_8px_24px_rgba(37,31,24,0.06)]">

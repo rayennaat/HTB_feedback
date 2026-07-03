@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
-import { TUNISIA_CATEGORIES } from '@/lib/tunisia-context'
+import { FEEDBACK_CATEGORIES } from '@/lib/tunisia-context'
 
 type PostStatus = 'pending' | 'approved' | 'rejected'
 type ReportStatus = 'open' | 'reviewed' | 'dismissed'
@@ -426,7 +426,7 @@ export default function DashboardPage() {
               {section !== 'users' && (
                 <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className="rounded-md border border-stone-300 px-3 py-2 text-sm text-stone-800 shadow-[0_8px_24px_rgba(37,31,24,0.06)] outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100">
                   <option value="all">All categories</option>
-                  {TUNISIA_CATEGORIES.map(category => <option key={category}>{category}</option>)}
+                  {FEEDBACK_CATEGORIES.map(category => <option key={category}>{category}</option>)}
                 </select>
               )}
               {section === 'posts' && (
@@ -445,7 +445,7 @@ export default function DashboardPage() {
                   <option value="all">All report statuses</option>
                 </select>
               )}
-              <input type="text" placeholder={section === 'users' ? 'Search users...' : 'Search title, user, city, category...'} className="rounded-md border border-stone-300 px-3 py-2 text-sm text-stone-950 placeholder:text-stone-500 shadow-[0_8px_24px_rgba(37,31,24,0.06)] outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100 md:col-span-2" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+              <input type="text" placeholder={section === 'users' ? 'Search users...' : 'Search title, user, location, category...'} className="rounded-md border border-stone-300 px-3 py-2 text-sm text-stone-950 placeholder:text-stone-500 shadow-[0_8px_24px_rgba(37,31,24,0.06)] outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-100 md:col-span-2" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
             </div>
           </div>
 
