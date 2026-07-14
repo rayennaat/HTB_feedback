@@ -10,13 +10,13 @@ const DEFAULT_PASSWORD = 'P1$$w0rD123!'
 const FLAG = process.env.FLAG || 'FLAG{local_test_flag_not_real}'
 
 async function main() {
-  // --- Clean slate ---
+  // Clean slate 
   await prisma.$executeRawUnsafe('TRUNCATE TABLE "Notification", "Report", "Comment", "Feedback", "User" RESTART IDENTITY CASCADE')
 
   const adminPasswordHash = await bcrypt.hash(ADMIN_PASSWORD, 10)
   const userPasswordHash = await bcrypt.hash(DEFAULT_PASSWORD, 10)
 
-  // --- Users ---
+  // Users
   const admin = await prisma.user.create({
     data: {
       username: 'admin',
@@ -42,7 +42,7 @@ async function main() {
     data: { username: 'nour', email: 'nour@example.com', password: userPasswordHash }
   })
 
-  // --- Seeded posts: public IDs 1-5, hidden flag ID 6, public IDs 7-8 ---
+  // Seeded posts: public IDs 1-5, hidden flag ID 6, public IDs 7-8 
   await prisma.feedback.create({
     data: {
       title: 'Laptop repair shop kept delaying pickup',
